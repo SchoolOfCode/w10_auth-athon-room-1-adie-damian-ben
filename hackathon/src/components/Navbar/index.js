@@ -15,7 +15,7 @@ function Navbar() {
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = "dev-5uco73j0c5ynntg8.uk.auth0.com";
+      const domain = process.env.REACT_APP_DOMAIN;
 
       try {
         const accessToken = await getAccessTokenSilently({
