@@ -2,9 +2,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import LoginButton from "../../login"
 import LogoutButton from "../../logout"
+import { Outlet, Link } from "react-router-dom";
 
 function Navbar() {
-    const {
+     const {
         user,
         isAuthenticated,
         isLoading,
@@ -22,7 +23,7 @@ function Navbar() {
               scope: "read:current_user",
             });
     
-            const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+            const userDetailsByIdUrl = await `https://${domain}/api/v2/users/${user.sub}`;
     
             const metadataResponse = await fetch(userDetailsByIdUrl, {
               headers: {
@@ -45,22 +46,30 @@ function Navbar() {
         return <div>Loading ...</div>;
       }
 
+      let userPicture
+      let userName
+
+      isAuthenticated ? userPicture = user.picture : userPicture = "https://toppng.com/uploads/preview/red-question-mark-png-11552242986dielb7cmf4.png";
+
+      isAuthenticated ? userName = user.name : userName = "Guest";
+
         return (
-            isAuthenticated && (
                 <div className="Navbar">
                     <ul>
                         <span id="nav">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/profile">Profile</a></li>
-                            <li><a href="/settings">Settings</a></li>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/profile">Profile</Link></li>
+                            <li><Link to="/settings">Settings</Link></li>
                         </span>
                         <span id="nav1">
                             <li><LogoutButton/></li>
-                            <li id="profile"><img src={user.picture} alt="profile"/>Hi, {user.name}!</li>
+                            <li id="profile">
+                            <img src={userPicture} alt="profile"/>Hi, {userName}!</li>
                         </span>
                     </ul>
+                    <Outlet />
                 </div>
-            )
+
         )
 }
 

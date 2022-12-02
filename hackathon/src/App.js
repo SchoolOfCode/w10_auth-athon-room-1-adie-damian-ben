@@ -2,24 +2,21 @@ import logo from "./logo.svg";
 import "./App.css";
 import LoginButton from "./login";
 import LogoutButton from "./logout";
-import Profile from "./profile";
+import ProfileInfo from "./pages/ProfileInfo";
 import Navbar from "./components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Navbar/>
-      </header>
-      <div className="body-content">
-        <h1>
-          Welcome, to Jurassic Park.
-        </h1>
-        <LoginButton/>
-        <Profile />
-      </div>
-      <footer></footer>
-    </div>
+    <BrowserRouter>
+    <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<Home />} />
+          <Route path="profile" element={<ProfileInfo />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
