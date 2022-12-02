@@ -53,7 +53,7 @@ const Profile = () => {
         {userMetadata ? (
           <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
         ) : (
-          "No user metadata defined"
+          "I AM A DINOSAUR"
         )}
       </div>
     )
