@@ -1,14 +1,10 @@
-import LoginButton from "../login";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./Home.css";
 import nav from "../images/nav.jpg"
 
 const Home = () => {
   const {
-    user,
     isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
   } = useAuth0();
 
   let navbarImage;
