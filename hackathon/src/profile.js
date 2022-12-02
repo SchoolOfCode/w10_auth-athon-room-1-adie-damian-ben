@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
+import "./profile.css";
 
 const Profile = () => {
   const {
@@ -45,16 +46,22 @@ const Profile = () => {
 
   return (
     isAuthenticated && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <h3>User Metadata</h3>
-        {userMetadata ? (
-          <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
-        ) : (
-          "I AM A DINOSAUR"
-        )}
+      <div className="container">
+        <div className="profilePicture">
+          <img src={user.picture} alt={user.name} />
+        </div>
+        <div className="userInfo">
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+        </div>
+          <div className="metadata">
+          <h3>User Metadata</h3>
+          {userMetadata ? (
+            <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
+          ) : (
+            "{navbar-quote: I AM A Navbar}"
+          )}
+        </div>
       </div>
     )
   );
